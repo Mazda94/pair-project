@@ -11,7 +11,3 @@ app.set('view engine', 'ejs')
 app.use('/', mainRoute)
 
 app.listen(port, () => console.log(`Listening to the port : ${port}`))
-
-const https = require('https')
-
-req.end()

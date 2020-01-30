@@ -87,16 +87,16 @@ class Controller {
             method: 'GET'
         }
 
-        const req = https.request(options, (res) => {
-            res.on('data', (d) => {
-                res.render('admin', { d })
-                // process.stdout.write(d)
+        const request = https.request(options, (res) => {
+            res.on('data', (datas) => {
+                res.render('admin', { datas })
             })
         })
 
-        req.on('error', (error) => {
+        request.on('error', (error) => {
             console.error(error)
         })
+        request.end()
     }
 
     static addCompanyPage(req, res) {
