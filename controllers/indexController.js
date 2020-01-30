@@ -9,39 +9,36 @@ class IndexController {
     }
 
     static login(req, res) {
-        let flag = true
-        for (let key in req.body) {
-            if (req.body[key] === '') {
-                flag = false
-            }
+        const user = req.body.username
+        const password = req.body.password
+        const options = {
+            include: Role,
+            where: {
+                [Op.or]: [{ email: user }, { username: user }],
+                [Op.and]: { password: password }
+            },
+            hooks: true
         }
+        User
+            .findOne(options)
+            .then(data => {
+                console.log(data)
+                req.session.user = {
+                    roleName : data.dataValues.Role.name,
+                    isLoggedIn : true
+                }
 
-        if (flag) {
-            const user = req.body.username
-            const password = req.body.password
-            const options = {
-                include: Role,
-                where: {
-                    [Op.or]: [{ email: user }, { username: user }],
-                    [Op.and]: { password: password }
-                },
-                hooks: true
-            }
-            User
-                .findOne(options)
-                .then(data => {
-                    if (data) {
-                        res.render(`${data.Role.name}`, { data })
-                    } else {
-                        res.render('index', { data: null, msg: 'Incorrect username / password' })
-                    }
-                })
-                .catch(err => {
-                    res.send(err)
-                })
-        } else {
-            res.render('index', { data: req.body, msg: null })
-        }
+                console.log(req.session.user)
+                if (data) {
+                    res.redirect(`/${req.session.roleName}`)
+                } else {
+                    res.render('index', { data: null, msg: 'Incorrect username / password' })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                res.send(err)
+            })
     }
 
     static registerPage(req, res) {
@@ -55,14 +52,14 @@ class IndexController {
             password: req.body.password,
             RoleId: 3
         }
+        console.log(value)
         User
             .create(value)
             .then(user => {
-                res.redirect('/', { data: null, msg: null })
+                res.render('index', { data: null, msg: null })
             })
             .catch(err => {
-                const error = Controller.createError(err.errors)
-                res.render('register', { error, value })
+                res.send('gagal')
             })
     }
 

@@ -12,9 +12,28 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <% if(page === 'Admin') { %>
         <li class="nav-item active">
-          <a class="nav-link" href="/admin">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/admin">Companies<span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin/client/list">Clients<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin/logout">Logout<span class="sr-only">(current)</span></a>
+        </li>
+        <% } else if ( page === 'Client') { %>
+        <li class="nav-item active">
+          <a class="nav-link" href="/client">Profile<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/client/buy">Buy<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/client/logout">Logout<span class="sr-only">(current)</span></a>
+        </li>
+        <% } %>
       </ul>
     </div>
   </nav>
