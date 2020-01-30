@@ -21,6 +21,26 @@ class ClientController {
             })
             .catch(err => res.send(err))
     }
+
+    static editProfilePage(req, res) {
+        res.render('edit_profile', {id : req.params.id})
+    }
+
+    static editProfile(req, res) {
+        const value = {
+            name: req.body.name,
+            balance: Number(req.body.balance),
+            UserId : req.params.id
+        }
+
+        console.log(value)
+        Client
+            .create(value)
+            .then(data => {
+                res.redirect('/client')
+            })
+            .catch(err => res.send(err))
+    }
 }
 
 module.exports = ClientController

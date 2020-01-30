@@ -5,43 +5,51 @@
             style="background-image: url(/images/financial.svg); background-size: 100vh; background-repeat: no-repeat;">
         </div>
         <div class="col-md-4 px-5 py-4 border border-right-0 rounded-left mt-5 bg-light">
+            <% if(msg){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= msg %>
+            </div>
+            <% } %>
             <form action="" method="POST">
                 <h2>Register</h2>
                 <hr>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" value="<%= value ? value.username : ''%>">
+                    <input type="text" class="form-control" id="username" name="username"
+                        value="<%= value ? value.username : ''%>">
                     <% if(error) { %>
-                        <% if(error.username) { %>
-                            <% error.username.forEach(err => { %>
-                                <small class="text-danger"><%= err %></small>
-                                <br>
-                            <% }) %>
-                        <% } %>
+                    <% if(error.username) { %>
+                    <% error.username.forEach(err => { %>
+                    <small class="text-danger"><%= err %></small>
+                    <br>
+                    <% }) %>
+                    <% } %>
                     <%} %>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" value="<%= value ? value.email : ''%>">
+                    <input type="text" class="form-control" id="email" name="email"
+                        value="<%= value ? value.email : ''%>">
                     <% if(error) { %>
-                        <% if(error.email) { %>
-                            <% error.email.forEach(err => { %>
-                                <small class="text-danger"><%= err %></small>
-                                <br>
-                            <% }) %>
-                        <% } %>
+                    <% if(error.email) { %>
+                    <% error.email.forEach(err => { %>
+                    <small class="text-danger"><%= err %></small>
+                    <br>
+                    <% }) %>
+                    <% } %>
                     <%} %>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" value="<%= value ? value.password : ''%>">
+                    <input type="password" class="form-control" id="password" name="password"
+                        value="<%= value ? value.password : ''%>">
                     <% if(error) { %>
-                        <% if(error.password) { %>
-                            <% error.password.forEach(err => { %>
-                                <small class="text-danger"><%= err %></small>
-                                <br>
-                            <% }) %>
-                        <% } %>
+                    <% if(error.password) { %>
+                    <% error.password.forEach(err => { %>
+                    <small class="text-danger"><%= err %></small>
+                    <br>
+                    <% }) %>
+                    <% } %>
                     <%} %>
                 </div>
                 <button type="submit" class="btn btn-primary mb-4">Register</button>

@@ -27,6 +27,7 @@ class IndexController {
                     isLoggedIn: true
                 }
                 if (data) {
+                    // res.send(data)
                     switch (data.dataValues.Role.name) {
                         case 'client':
                             res.render(`${data.dataValues.Role.name}`, { data })
@@ -41,13 +42,12 @@ class IndexController {
                 }
             })
             .catch(err => {
-                console.log(err)
-                res.send(err)
+                res.render('index', { data: null, msg: 'Incorrect username / password' })
             })
     }
 
     static registerPage(req, res) {
-        res.render('register', { error: null, value: null })
+        res.render('register', { error: null, value: null, msg : null })
     }
 
     static register(req, res) {
@@ -57,14 +57,13 @@ class IndexController {
             password: req.body.password,
             RoleId: 3
         }
-        console.log(value)
         User
             .create(value)
             .then(user => {
                 res.render('index', { data: null, msg: null })
             })
             .catch(err => {
-                res.send('gagal')
+                res.render('register', { value: null, error : null, msg: 'Field harus diisi' })
             })
     }
 
