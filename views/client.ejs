@@ -1,25 +1,42 @@
 <%- include('./partials/header', {page : 'Client'}) %>
 <div class="container mt-5">
-    
-    <h3 class="text-center">Company List</h3>
-    <a href="/add/company" class="btn btn-primary float-right my-2">Add Company</a>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Sector</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Profile</h3>
+            <div class="card profile-card-2">
+                <div class="card-img-block">
+                    <img class="img-fluid"
+                        src="https://images.pexels.com/photos/870903/pexels-photo-870903.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                        alt="Card image cap">
+                </div>
+                <div class="card-body pt-5">
+                    <h5 class="card-title"><%= !data.Client ? 'Anonym' : data.Client.name %></h5>
+                    <h6>Account Balance</h6>
+                    <p><%= !data.Client ? 'Rp.0' : data.Client.balance %></p>
+                    <a href="" class="btn btn-info w-100">Update Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3>Stocks</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Company Name</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 <%- include('./partials/footer')%>

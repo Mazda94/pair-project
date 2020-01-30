@@ -2,7 +2,7 @@ const Op = require('sequelize').Op
 const Model = require('../models/index')
 const User = Model.User
 const Role = Model.Role
-
+const Client = Model.Client
 class IndexController {
     static home(req, res) {
         res.render('index', { data: null, msg: null })
@@ -12,7 +12,7 @@ class IndexController {
         const user = req.body.username
         const password = req.body.password
         const options = {
-            include: Role,
+            include: [Role, Client],
             where: {
                 [Op.or]: [{ email: user }, { username: user }],
                 [Op.and]: { password: password }
@@ -22,15 +22,20 @@ class IndexController {
         User
             .findOne(options)
             .then(data => {
-                console.log(data)
                 req.session.user = {
-                    roleName : data.dataValues.Role.name,
-                    isLoggedIn : true
+                    roleName: data.dataValues.Role.name,
+                    isLoggedIn: true
                 }
-
-                console.log(req.session.user)
                 if (data) {
-                    res.redirect(`/${req.session.roleName}`)
+                    switch (data.dataValues.Role.name) {
+                        case 'client':
+                            res.render(`${data.dataValues.Role.name}`, { data })
+                            break
+
+                        case 'admin':
+                            res.redirect(`/${data.dataValues.Role.name}`)
+                            break
+                    }
                 } else {
                     res.render('index', { data: null, msg: 'Incorrect username / password' })
                 }

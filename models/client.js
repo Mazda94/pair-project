@@ -7,10 +7,13 @@ module.exports = (sequelize, DataTypes) => {
 
   Client.init({
     name: DataTypes.STRING,
-    balance: DataTypes.INTEGER
+    balance: DataTypes.INTEGER,
+    UserId : DataTypes.INTEGER
   }, { sequelize });
   Client.associate = function (models) {
-    // associations can be defined here
+    // associations can be defined here'
+
+    Client.belongsTo(models.User)
   };
   return Client;
 };

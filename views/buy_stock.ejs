@@ -1,0 +1,28 @@
+<%- include('./partials/header', {page : 'Client'}) %>
+<div class="container mt-5">
+    <h3>Buy Stock</h3>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Ticker</th>
+                <th scope="col">Changes</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% companies.forEach(company => { %>
+            <tr>
+                <td><%= company.id %></td>
+                <td><%= company.companyName %></td>
+                <td><%= company.ticker %></td>
+                <td><%= company.changes %></td>
+                <td><%= company.price %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include('./partials/footer')%>

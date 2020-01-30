@@ -56,7 +56,9 @@ class Controller {
     }
 
     static logout(req, res) {
-        console.log(req.session)
+        req.session.destroy(() => {
+            res.redirect('/')
+        })
     }
 }
 
