@@ -5,5 +5,12 @@
     "database": "Hacktiv8Trading",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "production": {
+    "username": "hivgfsiqtdozrv",
+    "password": "8ab2feaf0695a1ca55cc6d0e2cb53010c5976d494460d9a9d630f29cd7ec5329",
+    "database": "d15o5gm4kt1omp",
+    "host": "ec2-174-129-33-196.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
