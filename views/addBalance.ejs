@@ -1,0 +1,12 @@
+<%- include('./partials/header', {page : 'Client'}) %>
+<div class="container mt-5">
+    <h2>Welcome, <%= client.name %> !</h2><br>
+    <h3 class="text-center">Increase your value now!</h3>
+
+    <form method="POST">
+        <label> Add More Balance to Your Account </label>
+        <input type="text" name="balance">
+        <button>Buy It Now!!</button>
+    </form>
+</div>
+<%- include('./partials/footer')%></div>

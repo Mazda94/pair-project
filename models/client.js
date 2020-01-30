@@ -6,13 +6,14 @@ module.exports = (sequelize, DataTypes) => {
   class Client extends Model { }
   Client.init({
     name: DataTypes.STRING,
-    balance: DataTypes.INTEGER
+    balance: DataTypes.STRING,
+    StockId: DataTypes.INTEGER
   }, { sequelize });
   Client.associate = function (models) {
     // associations can be defined here
-    Client.hasMany(models.Stock, {
-      through: models.Company
-    }) 
+    Client.hasMany(models.Stock,{
+      through:models.Company
+    })
   };
   return Client;
 };

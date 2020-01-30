@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   const bcrypt = require('bcryptjs')
 
 
-  class User extends Model { }
+  class User extends Model {}
 
   User.init({
     email: {
