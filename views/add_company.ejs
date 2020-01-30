@@ -1,36 +1,35 @@
-<%- include('./partials/header', {page : 'Home', role : 'admin'}) %>
-<div class="container mt-5 mb-5">
-    <div class="col-md-8 p-4 border rounded-left bg-light">
-        <h3>Add Company</h3>
-        <hr>
-        <form action="" method="POST">
-            <div class="form-group">
-                <label for="name">Company Name</label>
-                <input type="text" class="form-control" id="name" name="companyName">
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address">
-            </div>
-            <div class="form-group">
-                <label for="sector">Sector</label>
-                <input type="text" class="form-control" id="sector" name="sector">
-            </div>
-
-            <div class="form-group">
-                <label for="username">Company User</label>
-                <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <div class="form-group">
-                <label for="email">Company Email</label>
-                <input type="text" class="form-control" id="email" name="email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="text" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
+<%- include('./partials/header', {page : 'Admin'}) %>
+<div class="container my-5">
+    <h3>Add Company</h3>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Company Name</th>
+                <th scope="col">Ticker</th>
+                <th scope="col">Changes</th>
+                <th scope="col">Price</th>
+                <th scope="col">Change Percentage</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% datas.forEach(data => { %>
+            <tr>
+                <td><%= data.companyName %></td>
+                <td><%= data.ticker %></td>
+                <td><%= data.changes %></td>
+                <td><%= data.price %></td>
+                <td><%= data.changesPercentage %></td>
+                <form action="/add/company" method="POST">
+                    <input type="hidden" name="companyName" value="<%= data.companyName %>" />
+                    <input type="hidden" name="price" value="<%= data.price %>" />
+                    <input type="hidden" name="changes" value="<%= data.changes %>" />
+                    <td><input type="submit" value="Add" class="btn btn-info"></td>
+                </form>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </div>
 <%- include('./partials/footer')%>

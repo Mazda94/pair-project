@@ -1,10 +1,9 @@
-const https = require('https')
 const Op = require('sequelize').Op
 const Model = require('../models/index')
 const User = Model.User
 const Role = Model.Role
-const Company = Model.Company
-class Controller {
+
+class IndexController {
     static home(req, res) {
         res.render('index', { data: null, msg: null })
     }
@@ -79,56 +78,6 @@ class Controller {
         return temp
     }
 
-    static admin(req, res) {
-        const options = {
-            hostname: 'financialmodelingprep.com',
-            port: 443,
-            path: '/api/v3/stock/actives',
-            method: 'GET'
-        }
-
-        const request = https.request(options, (res) => {
-            res.on('data', (datas) => {
-                res.render('admin', { datas })
-            })
-        })
-
-        request.on('error', (error) => {
-            console.error(error)
-        })
-        request.end()
-    }
-
-    static addCompanyPage(req, res) {
-        res.render('add_company')
-    }
-
-    static addCompany(req, res) {
-        const companyValue = {
-            companyName: req.body.companyName,
-            address: req.body.address,
-            sector: req.body.sector
-        }
-
-        const companyUser = {
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            RoleId: 2
-        }
-
-        Promise.all([
-            User.create(companyUser),
-            Company.create(companyValue)
-        ])
-            .then(datas => {
-                res.redirect('/admin')
-            })
-            .catch(err => {
-                console.log(err)
-                res.send(err)
-            })
-    }
 }
 
-module.exports = Controller
+module.exports = IndexController

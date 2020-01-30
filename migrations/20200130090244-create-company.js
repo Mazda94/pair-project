@@ -11,11 +11,14 @@ module.exports = {
       companyName: {
         type: Sequelize.STRING
       },
-      address: {
-        type: Sequelize.STRING
+      changes: {
+        type: Sequelize.DECIMAL
       },
-      sector: {
-        type: Sequelize.STRING
+      price: {
+        type: Sequelize.DECIMAL
+      },
+      stocks: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
