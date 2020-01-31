@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here'
 
     Client.belongsTo(models.User)
+    Client.belongsToMany(models.Company, {through : models.Stock})
   };
   return Client;
 };

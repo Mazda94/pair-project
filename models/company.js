@@ -11,14 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     ticker: DataTypes.STRING
   }, {
-    hooks: {
-      beforeBulkCreate(instances, options) {
-        console.log(instances)
-      }
-    }, sequelize
+    sequelize
   });
   Company.associate = function (models) {
     // associations can be defined here
+    Company.belongsToMany(models.Client, { through: models.Stock })
   };
   return Company;
 };

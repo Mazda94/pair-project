@@ -1,7 +1,7 @@
 <%- include('./partials/header', {page : 'Client'}) %>
 <% if(data.Client === null) { %>
 <script>
-    if(!alert("Silahkan update profile anda!")) document.location = `/client/edit/profile/<%= data.id %>`;
+    if(!alert("Silahkan update profile anda!")) document.location = `/client/edit/profile`;
 </script>
 <% } %>
 
@@ -19,7 +19,7 @@
                     <h5 class="card-title"><%= !data.Client ? 'Anonym' : data.Client.name %></h5>
                     <h6>Account Balance</h6>
                     <p><%= !data.Client ? 'Rp.0' : data.Client.balance %></p>
-                    <a href="" class="btn btn-info w-100">Update Profile</a>
+                    <a href="/client/edit/profile" class="btn btn-info w-100">Update Profile</a>
                 </div>
             </div>
         </div>

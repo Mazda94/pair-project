@@ -1,10 +1,26 @@
 const Model = require('../models/index')
 const Client = Model.Client
 const Company = Model.Company
+const User = Model.User
+const Stock = Model.Stock
 
 class ClientController {
     static client(req, res) {
-        res.render('client', { data: { Client: null }, role: 'client' })
+        const userPromise = User.findOne({
+            include: Client,
+            where: { id: req.session.user.id }
+        })
+
+        const clientPromise = Client.findOne({
+            include: [Company],
+            where: { UserId: req.session.user.id }
+        })
+        Promise.all([userPromise, clientPromise])
+            .then(datas => {
+                // console.log(datas[1].dataValues.Companies)
+                res.render('client', { data: datas[0], role: 'client', stocks: datas[1].dataValues.Companies })
+            })
+            .catch(err => res.send(err))
     }
 
     static logout(req, res) {
@@ -22,18 +38,46 @@ class ClientController {
             .catch(err => res.send(err))
     }
 
+    static buy(req, res) {
+        Client
+            .findOne({
+                where: { UserId: req.session.user.id }
+            })
+            .then(client => {
+                const stockValue = {
+                    ClientId: client.id,
+                    CompanyId: Number(req.params.companyId)
+                }
+                return Stock
+                    .create(stockValue)
+            })
+            .then(result => {
+                res.redirect('/client/buy')
+            })
+            .catch(err => res.send(err))
+
+    }
+
     static editProfilePage(req, res) {
-        res.render('edit_profile', {id : req.params.id})
+        Client
+            .findOne({
+                where: { UserId: req.session.user.id }
+            })
+            .then(client => {
+                res.render('edit_profile', { data: client })
+            })
+            .catch(err => {
+                res.send(err)
+            })
     }
 
     static editProfile(req, res) {
         const value = {
             name: req.body.name,
             balance: Number(req.body.balance),
-            UserId : req.params.id
+            UserId: Number(req.session.user.id)
         }
 
-        console.log(value)
         Client
             .create(value)
             .then(data => {

@@ -10,6 +10,7 @@
                 <th scope="col">Ticker</th>
                 <th scope="col">Changes</th>
                 <th scope="col">Price</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,9 @@
                 <td><%= company.ticker %></td>
                 <td><%= company.changes %></td>
                 <td><%= company.price %></td>
+                <td>
+                    <a href="/client/accept/<%= company.id %>" onclick="return confirm('Apakah anda yakin akan membeli saham ini?')" class="btn btn-info">Buy</a>
+                </td>
             </tr>
             <% }) %>
         </tbody>

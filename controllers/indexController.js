@@ -23,11 +23,11 @@ class IndexController {
             .findOne(options)
             .then(data => {
                 req.session.user = {
+                    id : data.dataValues.id,
                     roleName: data.dataValues.Role.name,
                     isLoggedIn: true
                 }
                 if (data) {
-                    // res.send(data)
                     switch (data.dataValues.Role.name) {
                         case 'client':
                             res.render(`${data.dataValues.Role.name}`, { data })
@@ -63,7 +63,8 @@ class IndexController {
                 res.render('index', { data: null, msg: null })
             })
             .catch(err => {
-                res.render('register', { value: null, error : null, msg: 'Field harus diisi' })
+                const error = IndexController.createError(err.errors)
+                res.render('register', { value, error, msg: null })
             })
     }
 

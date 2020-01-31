@@ -6,7 +6,8 @@ const { isNotLoggedIn } = require('../middleware/middleware')
 route.get('/',isNotLoggedIn, clientController.client)
 route.get('/logout', isNotLoggedIn, clientController.logout)
 route.get('/buy', clientController.buyPage)
-route.get('/edit/profile/:id', clientController.editProfilePage)
-route.post('/edit/profile/:id', clientController.editProfile)
+route.get('/accept/:companyId', clientController.buy)
+route.get('/edit/profile', clientController.editProfilePage)
+route.post('/edit/profile', clientController.editProfile)
 
 module.exports = route
